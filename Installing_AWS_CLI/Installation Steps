@@ -1,0 +1,10 @@
+1. Check Python >>  python --version
+2. Check Pip >> pip --version
+  NOTE: We can also use the MSI Installer directly, downloading from internet and running the installer.
+  
+3. Run Command "pip install awscli"
+4. After the process is complete, you can verify the install using command
+  " aws --version"
+  
+  Output: aws-cli/2.7.7 Python/3.9.11 Windows/10 exe/AMD64 prompt/off
+
