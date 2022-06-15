@@ -1,0 +1,13 @@
+Command : aws configure
+1. Enter access key id
+2. Enter Secret access key
+3. Default region name (ap-south-1)
+4. Enter Default Output format - Which can be JSON, Text; (json)
+
+Command to check if we have access to s3
+:   aws s3 ls
+
+command : cat ~/.aws/credentials
+
+Now if we run aws configure again, these values will come preloaded.
+Now we can access aws services directly from the CLI.
