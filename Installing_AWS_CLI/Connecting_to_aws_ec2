@@ -2,7 +2,7 @@ Command : aws configure
 1. Enter access key id
 2. Enter Secret access key
 3. Default region name (ap-south-1)
-4. Enter Default Output format - Which can be JSON, Text; (json)
+4. Enter Default Output format - Which can be JSON, Text, Table; (we use json)
 
 Command to check if we have access to s3
 :   aws s3 ls
@@ -11,3 +11,12 @@ command : cat ~/.aws/credentials
 
 Now if we run aws configure again, these values will come preloaded.
 Now we can access aws services directly from the CLI.
+
+***********
+Windows users need to type the following command in the command prompt to access the ‘credentials’ file:
+
+notepad "./.aws/credentials" 
+
+If you are a Windows user, then you must provide the application name (notepad) and the path of the file (“./.aws/credentials”)
+to open a file through the command prompt. 
+****************
