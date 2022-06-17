@@ -1,0 +1,5 @@
+1. aws <service> <operation>
+service - ec2/s3/iam
+operation - list/delete/create
+
+2. Command "aws iam help" - will give help on all the commands.
