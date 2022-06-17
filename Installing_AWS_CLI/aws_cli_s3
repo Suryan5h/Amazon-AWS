@@ -29,3 +29,23 @@ rb: To remove an empty bucket
 rm: To remove an object
 sync: To sync the directories present in S3
 website: To set the website configuration for a bucket
+
+
+**************
+Question: Suppose you work in an e-commerce company that keeps records of multiple products (more than a thousand) in the S3 bucket ‘records’. The files have the following structure for filename: ‘category-productid.csv’. 
+
+You have to analyse the records associated with the ‘Electronics’ category only. You are expected to download specific category reports and then perform analysis over your local machine. 
+
+Provide the command that helps you perform this task.
+
+
+Hint: Explore the help section under the S3 service.
+
+
+Answer: 
+You can use the Exclude and Include filters to obtain the required objects. To download all the files associated with a particular category, you must use the --exclude and --include attribute together with the cp command under S3. Also, to check each file in the bucket, you have to use the recursive function:
+
+aws s3 cp s3://records “local_path” --recursive --exclude “*” --include “electronics*”
+
+Through this task, you must have realised the power of the AWS CLI and also learnt how it is better than the Management Console in performing challenging tasks.
+
