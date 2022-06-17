@@ -1,0 +1,31 @@
+# S3 Commands
+# Creating a bucket - mb command
+aws s3 mb s3://unique_bucket_name
+
+# Listing the buckets in S3 - ls command
+aws s3 ls
+
+# Copying a file from local machine to S3 bucket - cp command
+aws s3 cp ./test.json s3://unique_bucket_name/file_name.json
+
+# Listing the objects in the bucket - ls command
+aws s3 ls s3://unique_bucket_name
+
+# Removing a file from the bucket - rm command
+aws s3 rm s3://unique_bucket_name/file_name.json
+
+# Removing all the files from the bucket - rm command
+aws s3 rm --recursive s3://unique_bucket_name
+
+# Removing the bucket - rb command
+aws s3 rb s3://unique_bucket_name
+
+cp: To copy objects. It can be used to upload and download files from S3 to the local machine
+ls: To list the buckets/objects in S3
+mb: To create a new S3 bucket
+mv: To move the objects present on the local disk or in S3
+presign: To provide a pre-signed URL for an Amazon S3 object
+rb: To remove an empty bucket
+rm: To remove an object
+sync: To sync the directories present in S3
+website: To set the website configuration for a bucket
