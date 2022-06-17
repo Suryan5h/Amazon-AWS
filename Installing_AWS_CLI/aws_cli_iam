@@ -3,3 +3,119 @@ service - ec2/s3/iam
 operation - list/delete/create
 
 2. Command "aws iam help" - will give help on all the commands.
+3. aws iam create-user --user-name user1suryansh
+
+4. aws iam create-group --group-name group1suryansh
+
+5. aws iam add-user-to-group --user-name user1suryansh --group-name group1suryansh
+
+6. aws iam get-group --group-name group1suryansh
+
+7. notepad test.json
+Write the policy.
+{
+	"Version": "2012-10-17",
+    "Statement": [
+    	{
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": "*"
+    	}
+	]
+}
+
+8. aws iam create-policy --policy-name policy1suryansh --policy-document file://test.json
+
+9. notepad test_role.json
+{
+
+"Version": "2012-10-17",
+"Statement": [
+      {
+      "Effect": "Allow",
+      "Principal": {
+            "Service": "ec2.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole",
+      "Condition": {}
+      }
+   ]
+}
+
+10. aws iam create-role --role-name role1suryansh --assume-role-policy-document file://test_role.json
+
+11. Attaching the policy to the role.
+aws iam attach-role-policy --role role1suryansh --policy-arn arn:aws:iam::670958788611:policy/policy1suryansh
+
+12. Checking if this policy is attached to the role.
+aws iam list-attached-role-policies --role-name role1suryansh
+
+************
+Question: How will you create a role for an EC2 instance that provides full access to the AWS RDS? List the steps to perform the task. 
+
+Answer:
+Follow the steps below to create a role for an EC2 instance:
+
+1.Create a JSON file that stores the policy to allow the EC2 instance to assume a role
+2.Using the JSON file created in Step 1, run the following command to create a role:
+aws iam create-role --role-name role1 --assume-role-policy-document file://file.json  
+
+3.Now, you need to attach a policy to the created role. In the previous case, we created the JSON file ‘test.json’ to define the policy. 
+Since AWS has the inbuilt policy “AWSRDSFullAccess” to provide complete RDS access, you can directly attach it to the created role.
+Here, you can use the ARN of the policy to attach it to the role using the following command:
+aws iam attach-role-policy --role-name role1 --policy-arn arn:aws:iam::aws:policy/AmazonRDSFullAccess
+
+4.The role is now ready to be attached to the EC2 instance. We will see how to attach it to an EC2 instance when we work with EC2 through the CLI.
+*************
+
+C:\Users\Asus>notepad test2_file.json
+{
+    "Version":"2012-10-17",
+    "Statement":[
+        {
+            "Effect":"Allow",
+            "Principal":{
+                "Service": "ec2.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {}
+        }
+    ]
+}
+
+C:\Users\Asus>aws iam create-role --role-name roletestsuryansh --assume-role-policy-document file://test2_file.json
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "roletestsuryansh",
+        "RoleId": "AROAZYOCCUAB24AB5KAJA",
+        "Arn": "arn:aws:iam::(some number):role/roletestsuryansh",
+        "CreateDate": "2022-06-17T07:16:42+00:00",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "Service": "ec2.amazonaws.com"
+                    },
+                    "Action": "sts:AssumeRole",
+                    "Condition": {}
+                }
+            ]
+        }
+    }
+}
+
+
+C:\Users\Asus>aws iam attach-role-policy --role-name roletestsuryansh --policy-arn arn:aws:iam::aws:policy/AmazonRDSFullAccess
+
+C:\Users\Asus>aws iam list-attached-role-policies --role-name roletestsuryansh
+{
+    "AttachedPolicies": [
+        {
+            "PolicyName": "AmazonRDSFullAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AmazonRDSFullAccess"
+        }
+    ]
+}
