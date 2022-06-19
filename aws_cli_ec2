@@ -1,0 +1,53 @@
+************    STEP-1     ***************
+# EC2 Commands
+# Creating a VPC
+aws ec2 create-vpc --cidr-block 10.0.0.0/16
+
+# VPC Details
+aws ec2 describe-vpcs --vpc-ids vpc_ID_from_above_command
+
+# Creating subnet 1
+aws ec2 create-subnet --vpc-id vpc_ID_from_above_command --cidr-block 10.0.1.0/24
+
+# Copy the subnet ID for subnet 1 from here
+
+# Creating subnet 2
+aws ec2 create-subnet --vpc-id vpc_ID_from_above_command --cidr-block 10.0.2.0/24
+
+# Copy the subnet ID for subnet 2 from here
+
+# Subnet 1 Details
+aws ec2 describe-subnets --subnet-ids subnet_1_ID_copied_from_above
+
+CIDR Blocks
+Classless Inter Domain Routing
+
+10.0.1.0/26 means
+32 - 26 = 6 bits we can change (last 6 bits)
+So , 2^6 = 64 IP Addresses in this range
+So Ip addresses - 10.0.1.0 - 10.0.1.63
+
+
+**********          STEP2          ************
+# Creating internet gateway
+aws ec2 create-internet-gateway
+
+# Copy the Internet Gateway ID from here
+
+# Attaching the internet gateway with the VPC created before
+aws ec2 attach-internet-gateway --vpc-id vpc_ID --internet-gateway-id internet_gateway_ID
+
+# Create Route table
+aws ec2 create-route-table --vpc-id vpc_ID
+
+# Copy the Route table ID from here
+
+# Attaching the route table to the internet gateway
+aws ec2 create-route --route-table-id route_table_ID --destination-cidr-block 0.0.0.0/0 --gateway-id internet_gateway_ID
+
+# Attaching the route table with the subnet 1
+aws ec2 associate-route-table --subnet-id subnet_1_ID --route-table-id route_table_ID
+
+# Code to map a public IP to the instance on launch
+aws ec2 modify-subnet-attribute --subnet-id subnet_1_ID --map-public-ip-on-launch
+
