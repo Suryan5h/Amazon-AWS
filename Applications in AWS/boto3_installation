@@ -13,3 +13,30 @@ Installing Jupyter on ec2 instance
 4. Now, the Jupyter Notebook is running on the EC2 instance. However, we need to access it
 through a browser using SSH tunneling. This step differs for Windows and Linux/Mac
 users.
+
+Jupyter Notebook:
+# Importing Boto3
+import boto3
+
+# Creating S3 client
+s3 = boto3.client('s3')
+
+# Listing the buckets
+response = s3.list_buckets()
+
+*********************************************
+If this is showing credentials error, use this instead.
+AWS_S3_CREDS = {
+    "aws_access_key_id":"your access key", # os.getenv("AWS_ACCESS_KEY")
+    "aws_secret_access_key":"your aws secret key" # os.getenv("AWS_SECRET_KEY")
+}
+s3_client = boto3.client('s3',**AWS_S3_CREDS)
+response = s3_client.list_buckets()
+***********************************************
+
+# Printing the response variable
+print(response)
+
+# Printing the bucket names
+for bucket in response['Buckets']:
+    print(bucket['Name'])
