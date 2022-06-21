@@ -1,0 +1,15 @@
+Steps:
+1. Ensure we have python and pip.
+2. pip3 install boto3
+3. pip3 list
+
+Installing Jupyter on ec2 instance
+1. pip3 install jupyter --user
+2. Verify Jupter server status
+        jupyter notebook list
+3. To start Jupyter notebook
+        jupyter notebook
+
+4. Now, the Jupyter Notebook is running on the EC2 instance. However, we need to access it
+through a browser using SSH tunneling. This step differs for Windows and Linux/Mac
+users.
