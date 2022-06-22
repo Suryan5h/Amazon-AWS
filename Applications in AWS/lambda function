@@ -1,0 +1,4 @@
+Predefined function that can be called as and when required.
+Process is divided into 2 parts:
+  1. defining the lambda function using the required service
+  2. invoking the function when required
